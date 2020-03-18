@@ -24,7 +24,7 @@ public class LoginService {
 		String userDetails = null;
 			
 		/* Get Access Token using authorization code */
-		String credentials = "javainuse:secret";
+		String credentials = "loginclient:secret";
 		String encodedCredentials = new String(Base64.encodeBase64(credentials.getBytes()));
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -58,9 +58,4 @@ public class LoginService {
 		
 		return userDetails;
 	}
-	
-	
-	
-	
-
 }
