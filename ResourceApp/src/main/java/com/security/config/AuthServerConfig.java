@@ -15,7 +15,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 		
 		String encodedPassword = new SecurityConfig().passwordEncoder().encode("secret");
 		
-		clients.inMemory().withClient("javainuse").secret(encodedPassword).authorizedGrantTypes("authorization_code")
+		clients.inMemory().withClient("loginclient").secret(encodedPassword).authorizedGrantTypes("authorization_code")
         .scopes("read").authorities("CLIENT").redirectUris("http://localhost:8090/clientapp/api/v1/loginSuccess");
 	}
 }
