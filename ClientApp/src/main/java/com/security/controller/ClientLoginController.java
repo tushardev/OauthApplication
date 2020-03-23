@@ -1,25 +1,12 @@
 package com.security.controller;
 
-import java.io.IOException;
-import java.util.Arrays;
-
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.security.service.login.LoginService;
 
 @RestController
@@ -42,6 +29,7 @@ public class ClientLoginController {
 		userLoginResult = loginService.login(code);
 		
 		} catch(Exception ex) {
+			ex.printStackTrace();
 			String error = "Below Error in Logging to the resource application \n" + ex.getMessage();
 			return error;
 		}
