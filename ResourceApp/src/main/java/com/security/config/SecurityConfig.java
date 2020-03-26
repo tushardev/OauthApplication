@@ -21,23 +21,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
     }
 	
 	
-	@Override
+	/*@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		/* Using in-memory authentication provider here */
+		 //Using in-memory authentication provider here 
 		String encodedPassword = passwordEncoder().encode("kadale");
         auth.inMemoryAuthentication().
                 withUser("tushar").password(encodedPassword).roles("ADMIN");
-	}
+	}*/
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		/* For in-build authorization server login */
-		http.authorizeRequests().antMatchers("/").permitAll()
+		/* Commented code For local authorization server flow */
+		/*http.authorizeRequests().antMatchers("/").permitAll()
 			.antMatchers("/api/v1/login-success").hasAnyRole("ADMIN")
 			.anyRequest().authenticated().and().formLogin()
 			.permitAll().and().logout().permitAll();
+			
+			http.csrf().disable();*/
 		
-		http.csrf().disable();
+		 http.authorizeRequests()
+         .anyRequest().authenticated()
+         .and()
+         .oauth2Login();
 	}
 	
 	@Bean
