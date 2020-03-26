@@ -15,6 +15,7 @@
             <p>
                 <label>Click On Login Button</label>
                 
+                <!--  Commented code for Local Authorization Server flow -->
                 <!--  <input type="text" name="response_type" value="code" hidden="true"/> 
                  <input type="text" name="client_id" value="loginclient" hidden="true" />
                  <input type="text" name="redirect_uri" value="http://localhost:8090/clientapp/api/v1/loginSuccess" hidden="true" />
@@ -23,8 +24,8 @@
                  <input type="text" name="response_type" value="code" hidden="true"/> 
                  <input type="text" name="client_id" value="sb-na-016638a2-874b-4217-9019-4dd48b755af2!t40200" hidden="true" />
                  <input type="text" name="redirect_uri" value="http://localhost:8090/clientapp/api/v1/loginSuccess" hidden="true" />
-                 
                  <input type="SUBMIT" value="Login" />
+                 
         </form:form>
     </div>
 </body>

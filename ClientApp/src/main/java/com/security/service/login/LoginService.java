@@ -22,8 +22,11 @@ public class LoginService {
 		RestTemplate restTemplate = new RestTemplate();
 		String userDetails = null;
 			
-		/* Get Access Token using authorization code */
+		/* Commented code for local authorization server flow */
 		/*String credentials = "loginclient:secret";*/
+		/*String access_token_url = "http://localhost:8080/resourceapp/oauth/token";*/
+		
+		
 		String credentials = "sb-na-016638a2-874b-4217-9019-4dd48b755af2!t40200:UnYQJ7rXrV1+pWoGxzDAL2FDTig=";
 		String encodedCredentials = new String(Base64.encodeBase64(credentials.getBytes()));
 		
@@ -33,7 +36,6 @@ public class LoginService {
 		
 		HttpEntity<String> request = new HttpEntity<String>(headers);
 		
-		/*String access_token_url = "http://localhost:8080/resourceapp/oauth/token";*/
 		
 		String access_token_url = "https://p2002038304trial.authentication.eu10.hana.ondemand.com/oauth/token";
 		access_token_url += "?code=" + code;
@@ -41,22 +43,22 @@ public class LoginService {
 		access_token_url += "&redirect_uri=http://localhost:8090/clientapp/api/v1/loginSuccess";
 		
 		response = restTemplate.exchange(access_token_url, HttpMethod.GET, request, JWTToken.class);
-		System.out.println("Access Token Response ---------" + response.getBody());
 		
 		String token = response.getBody().getAccess_token();
+		System.out.println("Access Token Response ---------\n" + token);
 		
-		/* Get the required resource using access token */
+		/* Commented code fpr local authorization server flow. */
 		/*ObjectMapper mapper = new ObjectMapper();
 		JsonNode node = mapper.readTree(response.getBody().get);
 		String token = node.path("access_token").asText();*/
 		
-		String url = "http://localhost:8080/resourceapp/api/v1/login-success";
+		String resourceUrl = "http://localhost:8080/resourceapp/api/v1/login-success";
 		
 		HttpHeaders headers1 = new HttpHeaders();
 		headers1.add("Authorization", "Bearer " + token);
 		HttpEntity<String> entity = new HttpEntity<>(headers1);
 		
-		ResponseEntity<String> userLoginResponse = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+		ResponseEntity<String> userLoginResponse = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, String.class);
 		userDetails = userLoginResponse.getBody();
 		
 		return userDetails;
